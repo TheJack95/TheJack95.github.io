@@ -195,10 +195,12 @@ h2 { font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -0.8px; line-height: 1
 }
 
 /* Games */
-/* Logo tiles, as on the app's Collezione tab: five to a row, the last row centred. */
+/* Logo tiles, as on the app's Collezione tab: the supported games in one row of six, the
+   upcoming ones dimmed underneath. */
 .games { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 0; padding: 0; list-style: none; }
 .game {
-  flex: 0 1 calc((100% - 4 * 12px) / 5);
+  position: relative;
+  flex: 0 1 calc((100% - 5 * 12px) / 6);
   aspect-ratio: 1.5;
   max-width: 100%;
   display: flex;
@@ -208,6 +210,18 @@ h2 { font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -0.8px; line-height: 1
   background: var(--surface);
 }
 .game img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+.soon-label {
+  display: block;
+  margin: 28px 0 12px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.games.soon .game { background: transparent; border-style: dashed; }
+.games.soon .game img { opacity: 0.4; filter: grayscale(1); }
 
 /* Limits: one row per cap, the number set like a counter */
 .limits { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
@@ -475,16 +489,19 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
   <section>
     <h2>I giochi</h2>
     <p class="sub">Alla registrazione scegli fino a due giochi.</p>
-    <ul class="games">
+    <ul class="games" aria-label="Giochi supportati">
       <li class="game"><img src="games/pokemon.png" alt="Pokémon" loading="lazy"></li>
       <li class="game"><img src="games/magic.png" alt="Magic: The Gathering" loading="lazy"></li>
       <li class="game"><img src="games/onepiece.png" alt="One Piece" loading="lazy"></li>
-      <li class="game"><img src="games/yugioh.png" alt="Yu-Gi-Oh!" loading="lazy"></li>
       <li class="game"><img src="games/dragonballsuper.png" alt="Dragon Ball Super Fusion World" loading="lazy"></li>
-      <li class="game"><img src="games/dragonballsupermasters.png" alt="Dragon Ball Super Masters" loading="lazy"></li>
       <li class="game"><img src="games/gundam.png" alt="Gundam" loading="lazy"></li>
-      <li class="game"><img src="games/riftbound.png" alt="Riftbound" loading="lazy"></li>
       <li class="game"><img src="games/sorcery.png" alt="Sorcery: Contested Realm" loading="lazy"></li>
+    </ul>
+    <span class="soon-label" id="soon-label">In arrivo</span>
+    <ul class="games soon" aria-labelledby="soon-label">
+      <li class="game"><img src="games/yugioh.png" alt="Yu-Gi-Oh!" loading="lazy"></li>
+      <li class="game"><img src="games/dragonballsupermasters.png" alt="Dragon Ball Super Masters" loading="lazy"></li>
+      <li class="game"><img src="games/riftbound.png" alt="Riftbound" loading="lazy"></li>
     </ul>
   </section>
 
