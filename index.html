@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OmniTCG</title>
+<meta name="description" content="Inquadra la carta, scopri quanto vale: OmniTCG riconosce le tue carte collezionabili e ti mostra i prezzi di CardTrader e Cardmarket.">
+<meta name="theme-color" content="#10122c">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="OmniTCG">
+<meta property="og:description" content="Inquadra la carta, scopri quanto vale. Scarica l'app per Android.">
+<meta property="og:url" content="https://thejack95.github.io/">
+<meta property="og:image" content="https://thejack95.github.io/icon.png">
+</head>
+<body><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: a binder page — hero with the fanned cards, then the features as a 3×2 "pocket" grid, then install steps. Single dark look, like the app. */
+:root {
+  --navy: #10122c;
+  --navy-deep: #0a0b1a;
+  --navy-glow: #23255a;
+  --surface: #171a3d;
+  --line: rgba(255,255,255,0.09);
+  --gold: #F2D24B;
+  --gold-ink: #3a2f05;
+  --text: #ffffff;
+  --muted: rgba(255,255,255,0.62);
+  --faint: rgba(255,255,255,0.40);
+  --blue: #5B8DEF;
+  --coral: #EF7A6B;
+  --mint: #6EE7A8;
+  --font: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+img { max-width: 100%; }
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+  padding-inline: 20px;
+}
+.wrap { max-width: 1040px; margin: 0 auto; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+
+/* Header */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; }
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 20px; letter-spacing: -0.3px; text-decoration: none; }
+.brand img { width: 40px; height: 40px; border-radius: 11px; }
+.top-link { font-weight: 700; font-size: 14px; color: var(--muted); text-decoration: none; }
+.top-link:hover { color: var(--gold); }
+
+/* Hero */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 40px;
+  align-items: center;
+  padding-block: 40px 72px;
+  position: relative;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -40px -20px auto;
+  height: 480px;
+  background: radial-gradient(60% 70% at 70% 40%, var(--navy-glow), transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+h1 {
+  font-size: clamp(38px, 6vw, 64px);
+  line-height: 1.04;
+  letter-spacing: -1.6px;
+  font-weight: 800;
+  margin: 14px 0 18px;
+  text-wrap: balance;
+}
+h1 em { font-style: normal; color: var(--gold); }
+.lead { font-size: 18px; color: var(--muted); max-width: 32em; margin: 0; }
+.cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; margin-top: 30px; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 54px;
+  padding: 0 26px;
+  border-radius: 16px;
+  background: var(--gold);
+  color: var(--gold-ink);
+  font-weight: 800;
+  font-size: 16px;
+  text-decoration: none;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -10px rgba(242,210,75,0.6); }
+.btn svg { width: 20px; height: 20px; }
+.meta { font-family: var(--mono); font-size: 12.5px; color: var(--faint); }
+
+/* Card fan */
+.fan { position: relative; height: 360px; display: grid; place-items: center; }
+.ring {
+  position: absolute;
+  width: 300px; height: 300px;
+  max-width: 100%;
+  border-radius: 50%;
+  border: 14px solid var(--gold);
+  background: var(--navy-glow);
+}
+.card {
+  position: absolute;
+  width: 150px;
+  aspect-ratio: 63 / 88;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 18px 40px -12px rgba(0,0,0,0.6);
+  transform-origin: 50% 110%;
+  transition: transform .5s cubic-bezier(.2,.8,.2,1);
+}
+.card .art { flex: 1; border-radius: 6px; background: rgba(255,255,255,0.25); }
+.card .bar { height: 7px; border-radius: 4px; background: rgba(255,255,255,0.45); }
+.card .bar.short { width: 55%; }
+.card .no { font-family: var(--mono); font-size: 10px; color: rgba(0,0,0,0.45); text-align: right; }
+.c1 { background: var(--blue); transform: rotate(-18deg) translateX(-30px); }
+.c2 { background: var(--coral); transform: rotate(18deg) translateX(30px); }
+.c3 { background: var(--gold); }
+.fan:hover .c1 { transform: rotate(-24deg) translateX(-46px); }
+.fan:hover .c2 { transform: rotate(24deg) translateX(46px); }
+.price {
+  position: absolute;
+  right: 4%;
+  bottom: 30px;
+  background: var(--surface);
+  border: 1px solid rgba(242,210,75,0.3);
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-size: 13px;
+  box-shadow: 0 14px 30px -12px rgba(0,0,0,0.7);
+}
+.price b { display: block; font-size: 19px; color: var(--gold); font-variant-numeric: tabular-nums; }
+.price span { color: var(--faint); font-family: var(--mono); font-size: 11px; }
+
+/* Sections */
+section { padding-block: 56px; border-top: 1px solid var(--line); }
+h2 { font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -0.8px; line-height: 1.15; margin: 0 0 8px; text-wrap: balance; }
+.sub { color: var(--muted); margin: 0 0 32px; max-width: 40em; }
+
+/* Features: a 9-pocket binder page reduced to 3 × 2 */
+.pockets { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.pocket {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 22px;
+  min-width: 0;
+}
+.pocket .ico {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  display: grid; place-items: center;
+  background: rgba(242,210,75,0.1);
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.pocket .ico svg { width: 22px; height: 22px; }
+.pocket h3 { font-size: 17px; margin: 0 0 6px; letter-spacing: -0.2px; }
+.pocket p { margin: 0; color: var(--muted); font-size: 14.5px; }
+.tag {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--faint);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 2px 7px;
+}
+
+/* Games */
+.games { display: flex; flex-wrap: wrap; gap: 10px; }
+.game {
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(242,210,75,0.25);
+  background: rgba(242,210,75,0.06);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* Install */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; counter-reset: step; }
+.steps li {
+  counter-increment: step;
+  border-left: 3px solid var(--gold);
+  padding: 4px 0 4px 18px;
+  min-width: 0;
+}
+.steps li::before {
+  content: "Passo " counter(step);
+  display: block;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 0.6px;
+  margin-bottom: 6px;
+}
+.steps h3 { margin: 0 0 4px; font-size: 17px; }
+.steps p { margin: 0; color: var(--muted); font-size: 14.5px; }
+.copy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--navy-deep);
+  border: 1px solid var(--line);
+}
+.copy code { font-family: var(--mono); font-size: 13px; color: var(--muted); overflow-wrap: anywhere; flex: 1 1 260px; min-width: 0; }
+.copy button {
+  font: 700 13px var(--font);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+.copy button:hover { border-color: var(--gold); }
+.note { margin-top: 18px; color: var(--faint); font-size: 14px; }
+
+footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var(--faint); font-size: 13px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+
+@media (max-width: 820px) {
+  .hero { grid-template-columns: minmax(0, 1fr); padding-block: 16px 48px; gap: 20px; }
+  .fan { height: 300px; order: -1; }
+  .ring { width: 250px; height: 250px; border-width: 12px; }
+  .card { width: 122px; }
+  .pockets, .steps { grid-template-columns: minmax(0, 1fr); }
+}
+@media (min-width: 821px) and (max-width: 980px) {
+  .pockets { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .btn { transition: none; }
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top" id="top"><img src="icon.png" alt="">OmniTCG</a>
+    <a class="top-link" href="#installa">Come si installa</a>
+  </header>
+
+  <div class="hero">
+    <div>
+      <div class="eyebrow">App per Android · Versione 1.4.0</div>
+      <h1>Inquadra la carta. <em>Scopri quanto vale.</em></h1>
+      <p class="lead">OmniTCG riconosce le tue carte con la fotocamera, ti mostra i prezzi di CardTrader e Cardmarket e tiene in ordine la collezione di tutti i tuoi giochi, in un posto solo.</p>
+      <div class="cta">
+        <a class="btn apk-link" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
+          Scarica l'APK
+        </a>
+        <span class="meta">Solo Android · serve un account</span>
+      </div>
+    </div>
+
+    <div class="fan" aria-hidden="true">
+      <div class="ring"></div>
+      <div class="card c1"><div class="art"></div><div class="bar"></div><div class="bar short"></div><div class="no">112/198</div></div>
+      <div class="card c2"><div class="art"></div><div class="bar"></div><div class="bar short"></div><div class="no">OP05-119</div></div>
+      <div class="card c3"><div class="art"></div><div class="bar"></div><div class="bar short"></div><div class="no">004/102</div></div>
+      <div class="price"><span>CARDMARKET · NM</span><b>€ 12,40</b></div>
+    </div>
+  </div>
+
+  <section>
+    <h2>Tutto quello che serve a un collezionista</h2>
+    <p class="sub">Dalla carta appena uscita dalla bustina al valore dell'intera collezione.</p>
+    <div class="pockets">
+      <article class="pocket">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><rect x="8" y="7" width="8" height="10" rx="1.5"/></svg></div>
+        <h3>Scansione</h3>
+        <p>Punta la fotocamera: nome, espansione e numero della carta in un attimo. In modalità continua passi alla successiva senza fermarti.</p>
+        <span class="tag">Set base · 004/102</span>
+      </article>
+      <article class="pocket">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg></div>
+        <h3>Prezzi veri</h3>
+        <p>Il prezzo di oggi su CardTrader e la media del listino europeo di Cardmarket, uno accanto all'altro.</p>
+        <span class="tag">EUR · aggiornati ogni giorno</span>
+      </article>
+      <article class="pocket">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke-dasharray="3 2"/></svg></div>
+        <h3>Collezione</h3>
+        <p>Sfogliala per gioco ed espansione. Vedi cosa possiedi e cosa ti manca per completare il set.</p>
+        <span class="tag">Possedute · Tutte · Mancanti</span>
+      </article>
+      <article class="pocket">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg></div>
+        <h3>Mazzi</h3>
+        <p>Crea i tuoi mazzi, riempili scansionando o dal catalogo e scopri quante carte ti mancano.</p>
+        <span class="tag">60 / 60</span>
+      </article>
+      <article class="pocket">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V8h14v13"/><path d="M5 8V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3"/><path d="M9 14h6"/></svg></div>
+        <h3>Modalità supporto</h3>
+        <p>Con il supporto stampato in 3D: telefono sul braccio, carte nella vaschetta una alla volta, e lo scatto parte da solo.</p>
+        <span class="tag">Su abilitazione</span>
+      </article>
+      <article class="pocket">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="m8.5 14 -1.5 7 5-3 5 3-1.5-7"/></svg></div>
+        <h3>Pre-valutazione</h3>
+        <p>Fotografa fronte, retro e qualche scatto a luce radente per una stima della condizione prima di vendere o far gradare.</p>
+        <span class="tag">NM · EX · GD …</span>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2>I giochi</h2>
+    <p class="sub">Alla registrazione scegli fino a due giochi.</p>
+    <div class="games">
+      <span class="game">Pokémon</span>
+      <span class="game">Magic: The Gathering</span>
+      <span class="game">One Piece</span>
+      <span class="game">Yu-Gi-Oh!</span>
+      <span class="game">Dragon Ball Super</span>
+      <span class="game">Digimon</span>
+      <span class="game">Gundam</span>
+      <span class="game">Riftbound</span>
+      <span class="game">Sorcery</span>
+    </div>
+  </section>
+
+  <section id="installa">
+    <h2>Come si installa</h2>
+    <p class="sub">L'app non è sul Play Store: si installa direttamente dall'APK. Ci vuole un minuto.</p>
+    <ol class="steps">
+      <li>
+        <h3>Scarica l'APK</h3>
+        <p>Apri questa pagina dal telefono Android e tocca "Scarica l'APK".</p>
+      </li>
+      <li>
+        <h3>Consenti l'installazione</h3>
+        <p>Apri il file scaricato. Android chiede di consentire le app da questa origine: attiva l'opzione per il browser che hai usato e torna indietro.</p>
+      </li>
+      <li>
+        <h3>Crea l'account</h3>
+        <p>Apri OmniTCG, tocca "Registrati", scegli i tuoi giochi e segui il tutorial.</p>
+      </li>
+    </ol>
+    <div class="copy">
+      <code id="apk-url"></code>
+      <button type="button" id="copy-btn">Copia il link</button>
+    </div>
+    <p class="note">Per ora c'è solo la versione Android. Gli account hanno un numero di scansioni giornaliere: il contatore si azzera ogni notte.</p>
+  </section>
+
+  <footer>
+    <span>OmniTCG · progetto personale</span>
+    <span>Non affiliato a The Pokémon Company, Wizards of the Coast, Bandai, Konami né agli altri editori dei giochi.</span>
+  </footer>
+</div>
+
+<script>
+  // Stable GitHub link to the asset of the newest release: upload the APK there as omnitcg.apk.
+  const APK_URL = 'https://github.com/TheJack95/tcg-scanner/releases/latest/download/omnitcg.apk';
+  document.querySelectorAll('.apk-link').forEach((a) => { a.href = APK_URL; });
+  const urlBox = document.getElementById('apk-url');
+  urlBox.textContent = APK_URL;
+  const btn = document.getElementById('copy-btn');
+  btn.addEventListener('click', () => {
+    const done = () => { btn.textContent = 'Copiato'; setTimeout(() => { btn.textContent = 'Copia il link'; }, 1800); };
+    const fallback = () => {
+      const range = document.createRange();
+      range.selectNodeContents(urlBox);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      btn.textContent = 'Selezionato: copialo';
+    };
+    try {
+      navigator.clipboard.writeText(APK_URL).then(done, fallback);
+    } catch (e) {
+      fallback();
+    }
+  });
+</script>
+
+</body>
+</html>
