@@ -9,10 +9,14 @@ Sito statico, nessuna build: `index.html` e `icon.png`, serviti così come sono 
 Il pulsante "Scarica l'APK" punta a `APK_URL`, in fondo a `index.html`:
 
 ```
-https://github.com/TheJack95/tcg-scanner/releases/latest/download/omnitcg.apk
+https://storage.googleapis.com/omnitcg-apk/omniTCG-1.4.0.apk
 ```
 
-Scarica il file `omnitcg.apk` allegato all'ultima release di `tcg-scanner`, quindi per una nuova versione basta pubblicare una release con un file con lo stesso nome. Funziona solo se quel repository è pubblico.
+Il file sta nel bucket GCS `omnitcg-apk`, che deve essere leggibile da tutti (`allUsers` → *Storage Object Viewer*). Il nome contiene la versione: a ogni release si carica il nuovo APK e si aggiorna `APK_URL`.
+
+```bash
+gcloud storage cp omniTCG-X.Y.Z.apk gs://omnitcg-apk/ --content-type=application/vnd.android.package-archive
+```
 
 ## Loghi dei giochi
 

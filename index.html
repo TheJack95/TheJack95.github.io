@@ -654,8 +654,8 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
 </div>
 
 <script>
-  // Stable GitHub link to the asset of the newest release: upload the APK there as omnitcg.apk.
-  const APK_URL = 'https://github.com/TheJack95/tcg-scanner/releases/latest/download/omnitcg.apk';
+  // The APK in the public GCS bucket. The file name carries the version: change it here on every release.
+  const APK_URL = 'https://storage.googleapis.com/omnitcg-apk/omniTCG-1.4.0.apk';
   document.querySelectorAll('.apk-link').forEach((a) => { a.href = APK_URL; });
   // Contacts. The address is put together here rather than written in the page,
   // so the simplest address-harvesting bots don't find it.
