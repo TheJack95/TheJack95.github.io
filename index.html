@@ -234,6 +234,52 @@ h2 { font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -0.8px; line-height: 1
 .limit p { margin: 0; color: var(--muted); font-size: 14px; }
 .limit.off .num { color: var(--faint); font-size: 26px; }
 
+/* Shops: copy on the left, a sample listing row on the right */
+.shop { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr); gap: 36px; align-items: start; }
+.shop-points { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+.shop-points li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 14px; }
+.shop-points .dot {
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  display: grid; place-items: center;
+  background: rgba(242,210,75,0.1);
+  color: var(--gold);
+}
+.shop-points .dot svg { width: 18px; height: 18px; }
+.shop-points h3 { margin: 0 0 2px; font-size: 16px; }
+.shop-points p { margin: 0; color: var(--muted); font-size: 14.5px; }
+.shop-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.listing {
+  border-radius: 20px;
+  border: 1px solid rgba(242,210,75,0.25);
+  background: var(--surface);
+  padding: 20px;
+  display: grid;
+  gap: 16px;
+  box-shadow: 0 24px 50px -24px rgba(0,0,0,0.7);
+}
+.listing-head { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 14px; align-items: center; }
+.listing-thumb { width: 52px; aspect-ratio: 63 / 88; border-radius: 6px; background: linear-gradient(145deg, #F0A34B, #EF7A6B); }
+.listing-name { font-weight: 800; font-size: 17px; }
+.listing-meta { font-family: var(--mono); font-size: 12px; color: var(--faint); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.chips span { font-family: var(--mono); font-size: 11px; padding: 2px 7px; border-radius: 6px; border: 1px solid var(--line); color: var(--muted); }
+.range-label { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--muted); margin-bottom: 8px; }
+.range-label b { color: var(--text); }
+.range { position: relative; height: 10px; border-radius: 5px; background: rgba(255,255,255,0.08); }
+.range .iqr { position: absolute; top: 0; bottom: 0; left: 16.7%; width: 41.6%; border-radius: 5px; background: rgba(242,210,75,0.35); }
+.range .median { position: absolute; top: -4px; bottom: -4px; left: 37.5%; width: 3px; margin-left: -1.5px; border-radius: 2px; background: var(--gold); }
+.range-ends { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11.5px; color: var(--faint); margin-top: 8px; font-variant-numeric: tabular-nums; }
+.listing-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding-top: 14px; border-top: 1px solid var(--line); }
+.listing-foot .cm { font-size: 13px; color: var(--muted); }
+.listing-foot .cm b { color: var(--text); font-variant-numeric: tabular-nums; }
+.sell-btn {
+  display: inline-flex; align-items: center; height: 38px; padding: 0 16px;
+  border-radius: 12px; background: var(--gold); color: var(--gold-ink); font-weight: 800; font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.listing-caption { font-size: 12px; color: var(--faint); text-align: center; margin: 10px 0 0; }
+
 /* Contacts */
 .contacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
 .contact {
@@ -328,6 +374,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
   .pockets, .steps { grid-template-columns: minmax(0, 1fr); }
   .game { flex-basis: calc((100% - 2 * 12px) / 3); padding: 10px; }
   .limits { grid-template-columns: minmax(0, 1fr); }
+  .shop { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .limit { grid-template-columns: 72px minmax(0, 1fr); gap: 14px; padding: 16px; }
   .limit .num { font-size: 32px; }
 }
@@ -497,6 +544,72 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
     <p class="note">Per ora c'è solo la versione Android. Prima di registrarti dai un'occhiata ai <a href="#limiti">limiti dell'account</a>.</p>
   </section>
 
+  <section id="negozi">
+    <h2>Per i negozi: vendi su CardTrader</h2>
+    <p class="sub">Un account negozio collega il tuo account CardTrader e mette in vendita le carte del tuo inventario senza ricaricarle a mano una per una.</p>
+    <div class="shop">
+      <div>
+        <ul class="shop-points">
+          <li>
+            <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1"/><path d="M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1"/></svg></span>
+            <div>
+              <h3>Il tuo account CardTrader</h3>
+              <p>Lo colleghi con il token API che trovi su CardTrader in Impostazioni → API. Il token è salvato cifrato e non viene mai mostrato: le carte vanno in vendita a nome tuo.</p>
+            </div>
+          </li>
+          <li>
+            <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 8 5-5 5 5"/><path d="M5 21h14"/></svg></span>
+            <div>
+              <h3>Caricamento in blocco</h3>
+              <p>Una carta alla volta o fino a 100 per invio. Stampa, condizione e lingua arrivano dalla scheda della carta, quindi non vanno reinserite.</p>
+            </div>
+          </li>
+          <li>
+            <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h18"/><path d="M7 8v8M17 8v8"/><path d="M12 6v12"/></svg></span>
+            <div>
+              <h3>Prezzo con il mercato davanti</h3>
+              <p>Per ogni copia vedi il range delle offerte CardTrader nella stessa condizione e lingua (minimo, mediana, massimo, senza le offerte fuori mercato) e il prezzo di tendenza di Cardmarket.</p>
+            </div>
+          </li>
+          <li>
+            <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></span>
+            <div>
+              <h3>Inventario sempre allineato</h3>
+              <p>Modifichi prezzo, quantità, condizione e lingua, o togli un prodotto dalla vendita. Quando una carta si vende, torna da sola fra quelle da caricare.</p>
+            </div>
+          </li>
+        </ul>
+        <div class="shop-cta">
+          <a class="btn shop-mail" href="#segnalazioni">Richiedi un account negozio</a>
+        </div>
+        <p class="note">Gli account negozio si attivano su richiesta. La vendita su CardTrader si gestisce dalla versione web.</p>
+      </div>
+
+      <figure style="margin: 0">
+        <div class="listing" aria-label="Esempio di carta pronta da mettere in vendita">
+          <div class="listing-head">
+            <div class="listing-thumb" aria-hidden="true"></div>
+            <div>
+              <div class="listing-name">Videl</div>
+              <div class="listing-meta">Fusion World · FB03-042 · SR</div>
+              <div class="chips"><span>NM</span><span>Italiano</span><span>3 copie</span></div>
+            </div>
+          </div>
+          <div>
+            <div class="range-label"><span>Offerte CardTrader per questa copia</span><span><b>18</b> offerte</span></div>
+            <div class="range" aria-hidden="true"><div class="iqr"></div><div class="median"></div></div>
+            <div class="range-ends"><span>min 1,20 €</span><span>mediana 1,65 €</span><span>max 2,40 €</span></div>
+          </div>
+          <div class="listing-foot">
+            <span class="cm">Cardmarket tendenza <b>1,50 €</b></span>
+            <span class="sell-btn">Metti in vendita 2 × 1,65 €</span>
+          </div>
+        </div>
+        <figcaption class="listing-caption">Esempio: una carta della collezione pronta da mettere in vendita.</figcaption>
+      </figure>
+    </div>
+  </section>
+
   <section id="segnalazioni">
     <h2>Segnalazioni e suggerimenti</h2>
     <p class="sub">Una carta riconosciuta male, un prezzo strano, un'idea per una funzione: scrivimi dove preferisci.</p>
@@ -560,6 +673,10 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
     'https://github.com/TheJack95/TheJack95.github.io/issues/new?body=' + encodeURIComponent(ISSUE_BODY);
   document.getElementById('mail-addr').textContent = MAIL;
   document.getElementById('mail-link').href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('OmniTCG');
+  document.querySelectorAll('.shop-mail').forEach((a) => {
+    a.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('OmniTCG: account negozio') +
+      '&body=' + encodeURIComponent('Nome del negozio:\nGiochi che vendi:\nUsername CardTrader:\n');
+  });
   const mailCopy = document.getElementById('mail-copy');
   mailCopy.addEventListener('click', () => {
     const ok = () => { mailCopy.textContent = 'Copiato'; setTimeout(() => { mailCopy.textContent = "Copia l'indirizzo"; }, 1800); };
