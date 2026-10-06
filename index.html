@@ -195,15 +195,19 @@ h2 { font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -0.8px; line-height: 1
 }
 
 /* Games */
-.games { display: flex; flex-wrap: wrap; gap: 10px; }
+/* Logo tiles, as on the app's Collezione tab: five to a row, the last row centred. */
+.games { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 0; padding: 0; list-style: none; }
 .game {
-  padding: 9px 16px;
-  border-radius: 999px;
-  border: 1px solid rgba(242,210,75,0.25);
-  background: rgba(242,210,75,0.06);
-  font-weight: 700;
-  font-size: 14px;
+  flex: 0 1 calc((100% - 4 * 12px) / 5);
+  aspect-ratio: 1.5;
+  max-width: 100%;
+  display: flex;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: var(--surface);
 }
+.game img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
 
 /* Install */
 .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; counter-reset: step; }
@@ -256,6 +260,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
   .ring { width: 250px; height: 250px; border-width: 12px; }
   .card { width: 122px; }
   .pockets, .steps { grid-template-columns: minmax(0, 1fr); }
+  .game { flex-basis: calc((100% - 2 * 12px) / 3); padding: 10px; }
 }
 @media (min-width: 821px) and (max-width: 980px) {
   .pockets { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -281,7 +286,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
           Scarica l'APK
         </a>
-        <span class="meta">Solo Android · serve un account</span>
+        <span class="meta">Solo Android</span>
       </div>
     </div>
 
@@ -340,17 +345,17 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
   <section>
     <h2>I giochi</h2>
     <p class="sub">Alla registrazione scegli fino a due giochi.</p>
-    <div class="games">
-      <span class="game">Pokémon</span>
-      <span class="game">Magic: The Gathering</span>
-      <span class="game">One Piece</span>
-      <span class="game">Yu-Gi-Oh!</span>
-      <span class="game">Dragon Ball Super</span>
-      <span class="game">Digimon</span>
-      <span class="game">Gundam</span>
-      <span class="game">Riftbound</span>
-      <span class="game">Sorcery</span>
-    </div>
+    <ul class="games">
+      <li class="game"><img src="games/pokemon.png" alt="Pokémon" loading="lazy"></li>
+      <li class="game"><img src="games/magic.png" alt="Magic: The Gathering" loading="lazy"></li>
+      <li class="game"><img src="games/onepiece.png" alt="One Piece" loading="lazy"></li>
+      <li class="game"><img src="games/yugioh.png" alt="Yu-Gi-Oh!" loading="lazy"></li>
+      <li class="game"><img src="games/dragonballsuper.png" alt="Dragon Ball Super Fusion World" loading="lazy"></li>
+      <li class="game"><img src="games/dragonballsupermasters.png" alt="Dragon Ball Super Masters" loading="lazy"></li>
+      <li class="game"><img src="games/gundam.png" alt="Gundam" loading="lazy"></li>
+      <li class="game"><img src="games/riftbound.png" alt="Riftbound" loading="lazy"></li>
+      <li class="game"><img src="games/sorcery.png" alt="Sorcery: Contested Realm" loading="lazy"></li>
+    </ul>
   </section>
 
   <section id="installa">
