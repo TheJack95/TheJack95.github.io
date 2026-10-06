@@ -234,6 +234,47 @@ h2 { font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -0.8px; line-height: 1
 .limit p { margin: 0; color: var(--muted); font-size: 14px; }
 .limit.off .num { color: var(--faint); font-size: 26px; }
 
+/* Contacts */
+.contacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  min-width: 0;
+}
+.contact h3 { margin: 0; font-size: 17px; display: flex; align-items: center; gap: 10px; }
+.contact h3 svg { width: 22px; height: 22px; color: var(--gold); flex: none; }
+.contact p { margin: 0; color: var(--muted); font-size: 14px; }
+.contact .addr { font-family: var(--mono); font-size: 13.5px; color: var(--text); overflow-wrap: anywhere; }
+.contact .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 4px; }
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 12px;
+  font: 700 14px var(--font);
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid rgba(242,210,75,0.35);
+  background: rgba(242,210,75,0.08);
+  color: var(--gold);
+}
+.pill-btn:hover { background: rgba(242,210,75,0.16); }
+.report-tips { margin: 22px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+.report-tips li {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 4px 9px;
+}
+
 /* Install */
 .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; counter-reset: step; }
 .steps li {
@@ -456,6 +497,43 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
     <p class="note">Per ora c'è solo la versione Android. Prima di registrarti dai un'occhiata ai <a href="#limiti">limiti dell'account</a>.</p>
   </section>
 
+  <section id="segnalazioni">
+    <h2>Segnalazioni e suggerimenti</h2>
+    <p class="sub">Una carta riconosciuta male, un prezzo strano, un'idea per una funzione: scrivimi dove preferisci.</p>
+    <div class="contacts">
+      <article class="contact">
+        <h3><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>GitHub</h3>
+        <p>Il modo migliore per i bug: la segnalazione resta tracciata e vedi quando viene risolta. Serve un account GitHub.</p>
+        <div class="actions">
+          <a class="pill-btn" id="issue-link" href="https://github.com/TheJack95/TheJack95.github.io/issues/new" target="_blank" rel="noopener">Apri una segnalazione</a>
+        </div>
+      </article>
+      <article class="contact">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email</h3>
+        <p>Per tutto il resto, o se non hai GitHub.</p>
+        <span class="addr" id="mail-addr">giacomocorro [at] gmail.com</span>
+        <div class="actions">
+          <a class="pill-btn" id="mail-link" href="#segnalazioni">Scrivi una mail</a>
+          <button type="button" class="pill-btn" id="mail-copy">Copia l'indirizzo</button>
+        </div>
+      </article>
+      <article class="contact" id="telegram-card" hidden>
+        <h3><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.7 19.4c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.2 13.1l-4.8-1.5c-1-.3-1.1-1 .2-1.5L20.5 2.9c.9-.3 1.7.2 1.4 1.4Z"/></svg>Telegram</h3>
+        <p>Per una domanda veloce.</p>
+        <span class="addr" id="telegram-handle"></span>
+        <div class="actions">
+          <a class="pill-btn" id="telegram-link" href="#segnalazioni" target="_blank" rel="noopener">Scrivimi su Telegram</a>
+        </div>
+      </article>
+    </div>
+    <ul class="report-tips" aria-label="Cosa indicare in una segnalazione">
+      <li>versione dell'app</li>
+      <li>modello del telefono</li>
+      <li>gioco e carta</li>
+      <li>uno screenshot</li>
+    </ul>
+  </section>
+
   <footer>
     <span>OmniTCG · progetto personale</span>
     <span>Non affiliato a The Pokémon Company, Wizards of the Coast, Bandai, Konami né agli altri editori dei giochi.</span>
@@ -466,25 +544,38 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
   // Stable GitHub link to the asset of the newest release: upload the APK there as omnitcg.apk.
   const APK_URL = 'https://github.com/TheJack95/tcg-scanner/releases/latest/download/omnitcg.apk';
   document.querySelectorAll('.apk-link').forEach((a) => { a.href = APK_URL; });
-  const urlBox = document.getElementById('apk-url');
-  urlBox.textContent = APK_URL;
-  const btn = document.getElementById('copy-btn');
-  btn.addEventListener('click', () => {
-    const done = () => { btn.textContent = 'Copiato'; setTimeout(() => { btn.textContent = 'Copia il link'; }, 1800); };
-    const fallback = () => {
+  // Contacts. The address is put together here rather than written in the page,
+  // so the simplest address-harvesting bots don't find it.
+  const MAIL = ['giacomocorro', 'gmail.com'].join('@');
+  // Telegram username without the @, e.g. 'nome'. Empty keeps the card hidden.
+  const TELEGRAM = 'wartractor';
+  const ISSUE_BODY = [
+    '**Cosa è successo**', '', '',
+    '**Cosa ti aspettavi**', '', '',
+    "**Versione dell'app:** ",
+    '**Telefono:** ',
+    '**Gioco e carta:** ',
+  ].join('\n');
+  document.getElementById('issue-link').href =
+    'https://github.com/TheJack95/TheJack95.github.io/issues/new?body=' + encodeURIComponent(ISSUE_BODY);
+  document.getElementById('mail-addr').textContent = MAIL;
+  document.getElementById('mail-link').href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('OmniTCG');
+  const mailCopy = document.getElementById('mail-copy');
+  mailCopy.addEventListener('click', () => {
+    const ok = () => { mailCopy.textContent = 'Copiato'; setTimeout(() => { mailCopy.textContent = "Copia l'indirizzo"; }, 1800); };
+    const select = () => {
       const range = document.createRange();
-      range.selectNodeContents(urlBox);
-      const sel = window.getSelection();
-      sel.removeAllRanges();
-      sel.addRange(range);
-      btn.textContent = 'Selezionato: copialo';
+      range.selectNodeContents(document.getElementById('mail-addr'));
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
     };
-    try {
-      navigator.clipboard.writeText(APK_URL).then(done, fallback);
-    } catch (e) {
-      fallback();
-    }
+    try { navigator.clipboard.writeText(MAIL).then(ok, select); } catch (e) { select(); }
   });
+  if (TELEGRAM) {
+    document.getElementById('telegram-handle').textContent = '@' + TELEGRAM;
+    document.getElementById('telegram-link').href = 'https://t.me/' + TELEGRAM;
+    document.getElementById('telegram-card').hidden = false;
+  }
 </script>
 
 </body>
