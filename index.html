@@ -209,6 +209,31 @@ h2 { font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -0.8px; line-height: 1
 }
 .game img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
 
+/* Limits: one row per cap, the number set like a counter */
+.limits { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.limit {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  padding: 18px 20px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+.limit .num {
+  font-family: var(--mono);
+  font-size: 40px;
+  line-height: 1;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+.limit .num small { display: block; font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase; color: var(--faint); margin-top: 8px; }
+.limit h3 { margin: 0 0 4px; font-size: 16px; }
+.limit p { margin: 0; color: var(--muted); font-size: 14px; }
+.limit.off .num { color: var(--faint); font-size: 26px; }
+
 /* Install */
 .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; counter-reset: step; }
 .steps li {
@@ -261,6 +286,9 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
   .card { width: 122px; }
   .pockets, .steps { grid-template-columns: minmax(0, 1fr); }
   .game { flex-basis: calc((100% - 2 * 12px) / 3); padding: 10px; }
+  .limits { grid-template-columns: minmax(0, 1fr); }
+  .limit { grid-template-columns: 72px minmax(0, 1fr); gap: 14px; padding: 16px; }
+  .limit .num { font-size: 32px; }
 }
 @media (min-width: 821px) and (max-width: 980px) {
   .pockets { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -278,7 +306,6 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
 
   <div class="hero">
     <div>
-      <div class="eyebrow">App per Android · Versione 1.4.0</div>
       <h1>Inquadra la carta. <em>Scopri quanto vale.</em></h1>
       <p class="lead">OmniTCG riconosce le tue carte con la fotocamera, ti mostra i prezzi di CardTrader e Cardmarket e tiene in ordine la collezione di tutti i tuoi giochi, in un posto solo.</p>
       <div class="cta">
@@ -307,7 +334,6 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><rect x="8" y="7" width="8" height="10" rx="1.5"/></svg></div>
         <h3>Scansione</h3>
         <p>Punta la fotocamera: nome, espansione e numero della carta in un attimo. In modalità continua passi alla successiva senza fermarti.</p>
-        <span class="tag">Set base · 004/102</span>
       </article>
       <article class="pocket">
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg></div>
@@ -319,25 +345,21 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5" stroke-dasharray="3 2"/></svg></div>
         <h3>Collezione</h3>
         <p>Sfogliala per gioco ed espansione. Vedi cosa possiedi e cosa ti manca per completare il set.</p>
-        <span class="tag">Possedute · Tutte · Mancanti</span>
       </article>
       <article class="pocket">
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg></div>
         <h3>Mazzi</h3>
         <p>Crea i tuoi mazzi, riempili scansionando o dal catalogo e scopri quante carte ti mancano.</p>
-        <span class="tag">60 / 60</span>
       </article>
       <article class="pocket">
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V8h14v13"/><path d="M5 8V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3"/><path d="M9 14h6"/></svg></div>
         <h3>Modalità supporto</h3>
         <p>Con il supporto stampato in 3D: telefono sul braccio, carte nella vaschetta una alla volta, e lo scatto parte da solo.</p>
-        <span class="tag">Su abilitazione</span>
       </article>
       <article class="pocket">
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="m8.5 14 -1.5 7 5-3 5 3-1.5-7"/></svg></div>
         <h3>Pre-valutazione</h3>
         <p>Fotografa fronte, retro e qualche scatto a luce radente per una stima della condizione prima di vendere o far gradare.</p>
-        <span class="tag">NM · EX · GD …</span>
       </article>
     </div>
   </section>
@@ -358,6 +380,55 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
     </ul>
   </section>
 
+  <section id="limiti">
+    <h2>I limiti dell'account</h2>
+    <p class="sub">Un account nuovo parte così. I contatori giornalieri si azzerano a mezzanotte UTC, cioè alle 2:00 in Italia (alle 1:00 con l'ora solare).</p>
+    <ul class="limits">
+      <li class="limit">
+        <div class="num">10<small>al giorno</small></div>
+        <div>
+          <h3>Scansioni</h3>
+          <p>Conta ogni tentativo, anche quando la carta non viene riconosciuta. Una foto con più carte vale una scansione.</p>
+        </div>
+      </li>
+      <li class="limit">
+        <div class="num">1<small>al giorno</small></div>
+        <div>
+          <h3>Pre-valutazione</h3>
+          <p>Una stima della condizione al giorno, anche se la valutazione non va a buon fine.</p>
+        </div>
+      </li>
+      <li class="limit">
+        <div class="num">10<small>in totale</small></div>
+        <div>
+          <h3>Mazzi</h3>
+          <p>Raggiunto il limite, cancella un mazzo per crearne uno nuovo.</p>
+        </div>
+      </li>
+      <li class="limit">
+        <div class="num">2<small>giochi</small></div>
+        <div>
+          <h3>Giochi</h3>
+          <p>Li scegli alla registrazione. La collezione e i prezzi riguardano solo i tuoi giochi.</p>
+        </div>
+      </li>
+      <li class="limit off">
+        <div class="num">—<small>su richiesta</small></div>
+        <div>
+          <h3>Modalità supporto</h3>
+          <p>Spenta sugli account nuovi: si attiva su richiesta, se hai il supporto stampato.</p>
+        </div>
+      </li>
+      <li class="limit off">
+        <div class="num">0<small>scansioni</small></div>
+        <div>
+          <h3>Collezione e catalogo</h3>
+          <p>Sfogliarli, cercare una carta o aggiungerla a mano non consuma scansioni.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
   <section id="installa">
     <h2>Come si installa</h2>
     <p class="sub">L'app non è sul Play Store: si installa direttamente dall'APK. Ci vuole un minuto.</p>
@@ -375,11 +446,14 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
         <p>Apri OmniTCG, tocca "Registrati", scegli i tuoi giochi e segui il tutorial.</p>
       </li>
     </ol>
-    <div class="copy">
-      <code id="apk-url"></code>
-      <button type="button" id="copy-btn">Copia il link</button>
-    </div>
-    <p class="note">Per ora c'è solo la versione Android. Gli account hanno un numero di scansioni giornaliere: il contatore si azzera ogni notte.</p>
+      <div class="cta">
+        <a class="btn apk-link" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
+          Scarica l'APK
+        </a>
+        <span class="meta">Solo Android</span>
+      </div>
+    <p class="note">Per ora c'è solo la versione Android. Prima di registrarti dai un'occhiata ai <a href="#limiti">limiti dell'account</a>.</p>
   </section>
 
   <footer>
