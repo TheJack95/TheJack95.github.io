@@ -247,6 +247,8 @@ h2 { font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -0.8px; line-height: 1
 .limit h3 { margin: 0 0 4px; font-size: 16px; }
 .limit p { margin: 0; color: var(--muted); font-size: 14px; }
 .limit.off .num { color: var(--faint); font-size: 26px; }
+/* Seven tiles in two columns: the last one takes the whole row instead of sitting alone. */
+.limit.wide { grid-column: 1 / -1; }
 
 /* Shops: copy on the left, a sample listing row on the right */
 .shop { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr); gap: 36px; align-items: start; }
@@ -488,12 +490,6 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
         <h3>Anche senza rete</h3>
         <p>Senza connessione puoi comunque sfogliare la collezione. Scansioni, prezzi e modifiche si aggiornano da soli appena torni online.</p>
       </article>
-      <article class="pocket">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></div>
-        <h3>Riconoscimento veloce</h3>
-        <p>Scarica sul telefono il catalogo dei tuoi giochi: le carte vengono riconosciute più in fretta, anche se a volte con meno precisione.</p>
-        <span class="tag">A pagamento</span>
-      </article>
     </div>
   </section>
 
@@ -556,6 +552,13 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
         </div>
       </li>
       <li class="limit off">
+        <div class="num">€<small>a pagamento</small></div>
+        <div>
+          <h3>Riconoscimento veloce</h3>
+          <p>Scarica sul telefono il catalogo dei tuoi giochi: le carte vengono riconosciute più in fretta, anche se a volte con meno precisione.</p>
+        </div>
+      </li>
+      <li class="limit off wide">
         <div class="num">∞<small>nessun limite</small></div>
         <div>
           <h3>Collezione e catalogo</h3>
