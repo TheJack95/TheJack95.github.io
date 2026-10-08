@@ -514,6 +514,23 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
     </div>
   </div>
 
+  <section>
+    <ul class="games" aria-label="Giochi supportati">
+      <li class="game"><img src="games/pokemon.png" alt="Pokémon" loading="lazy"></li>
+      <li class="game"><img src="games/magic.png" alt="Magic: The Gathering" loading="lazy"></li>
+      <li class="game"><img src="games/onepiece.png" alt="One Piece" loading="lazy"></li>
+      <li class="game"><img src="games/dragonballsuper.png" alt="Dragon Ball Super Fusion World" loading="lazy"></li>
+      <li class="game"><img src="games/gundam.png" alt="Gundam" loading="lazy"></li>
+      <li class="game"><img src="games/sorcery.png" alt="Sorcery: Contested Realm" loading="lazy"></li>
+    </ul>
+    <span class="soon-label" id="soon-label">In arrivo</span>
+    <ul class="games soon" aria-labelledby="soon-label">
+      <li class="game"><img src="games/yugioh.png" alt="Yu-Gi-Oh!" loading="lazy"></li>
+      <li class="game"><img src="games/dragonballsupermasters.png" alt="Dragon Ball Super Masters" loading="lazy"></li>
+      <li class="game"><img src="games/riftbound.png" alt="Riftbound" loading="lazy"></li>
+    </ul>
+  </section>
+
   <section id="supporto">
     <div class="jig">
       <div class="stand-wrap" aria-hidden="true">
@@ -553,7 +570,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
             <span class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg></span>
             <div>
               <h3>Non ce l'hai?</h3>
-              <p>Puoi richiedere il supporto direttamente a me.</p>
+              <p>Puoi richiedere il supporto contattandomi o acquistarne uno online.</p>
             </div>
           </li>
         </ul>
@@ -603,24 +620,6 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
     </div>
   </section>
 
-  <section>
-    <h2>I giochi</h2>
-    <p class="sub">Alla registrazione scegli fino a due giochi.</p>
-    <ul class="games" aria-label="Giochi supportati">
-      <li class="game"><img src="games/pokemon.png" alt="Pokémon" loading="lazy"></li>
-      <li class="game"><img src="games/magic.png" alt="Magic: The Gathering" loading="lazy"></li>
-      <li class="game"><img src="games/onepiece.png" alt="One Piece" loading="lazy"></li>
-      <li class="game"><img src="games/dragonballsuper.png" alt="Dragon Ball Super Fusion World" loading="lazy"></li>
-      <li class="game"><img src="games/gundam.png" alt="Gundam" loading="lazy"></li>
-      <li class="game"><img src="games/sorcery.png" alt="Sorcery: Contested Realm" loading="lazy"></li>
-    </ul>
-    <span class="soon-label" id="soon-label">In arrivo</span>
-    <ul class="games soon" aria-labelledby="soon-label">
-      <li class="game"><img src="games/yugioh.png" alt="Yu-Gi-Oh!" loading="lazy"></li>
-      <li class="game"><img src="games/dragonballsupermasters.png" alt="Dragon Ball Super Masters" loading="lazy"></li>
-      <li class="game"><img src="games/riftbound.png" alt="Riftbound" loading="lazy"></li>
-    </ul>
-  </section>
 
   <section id="limiti">
     <h2>I limiti dell'account</h2>
@@ -658,7 +657,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
         <div class="num">∞<small>nessun limite</small></div>
         <div>
           <h3>Collezione e catalogo</h3>
-          <p>Salva tutte le carte che vuoi e sfoglia il catalogo quanto vuoi: non consuma scansioni.</p>
+          <p>Salva tutte le carte che vuoi e sfoglia il catalogo quanto vuoi: non ci sono limiti.</p>
         </div>
       </li>
       <li class="limit off">
@@ -668,11 +667,18 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
           <p>I prezzi di CardTrader e Cardmarket delle tue carte sono inclusi per tutti, senza costi e senza limiti.</p>
         </div>
       </li>
-      <li class="limit off wide">
-        <div class="num">—<small>su richiesta</small></div>
+      <li class="limit off">
+        <div class="num">∞<small>incluso</small></div>
         <div>
-          <h3>Riconoscimento veloce</h3>
-          <p>Scarica sul telefono il catalogo dei tuoi giochi: le carte vengono riconosciute più in fretta, anche se a volte con meno precisione. I limiti di scansione non vengono applicati</p>
+          <h3>Prezzi sempre aggiornati</h3>
+          <p>I prezzi di CardTrader e Cardmarket delle tue carte sono inclusi per tutti, senza costi e senza limiti.</p>
+        </div>
+      </li>
+      <li class="limit off">
+        <div class="num">∞<small>incluso</small></div>
+        <div>
+          <h3>Catalogo sempre aggiornato</h3>
+          <p>Le nuove espansioni vengono aggiunte automaticamente al catalogo. Non devi fare nulla.</p>
         </div>
       </li>
     </ul>
@@ -682,32 +688,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
     </p>
   </section>
 
-  <section id="installa">
-    <h2>Come si installa</h2>
-    <p class="sub">L'app non è sul Play Store: si installa direttamente dall'APK. Ci vuole un minuto.</p>
-    <ol class="steps">
-      <li>
-        <h3>Scarica l'APK</h3>
-        <p>Apri questa pagina dal telefono Android e tocca "Scarica l'APK".</p>
-      </li>
-      <li>
-        <h3>Consenti l'installazione</h3>
-        <p>Apri il file scaricato. Android chiede di consentire le app da questa origine: attiva l'opzione per il browser che hai usato e torna indietro.</p>
-      </li>
-      <li>
-        <h3>Crea l'account</h3>
-        <p>Apri OmniTCG, tocca "Registrati", scegli i tuoi giochi e segui il tutorial.</p>
-      </li>
-    </ol>
-      <div class="cta">
-        <a class="btn apk-link" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
-          Scarica l'APK
-        </a>
-        <span class="meta">Solo Android</span>
-      </div>
-    <p class="note">Per ora c'è solo la versione Android. Prima di registrarti dai un'occhiata ai <a href="#limiti">limiti dell'account</a>.</p>
-  </section>
+  
 
   <section id="negozi">
     <h2>Vendi su CardTrader</h2>
@@ -773,6 +754,33 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
         <figcaption class="listing-caption">Esempio: una carta della collezione pronta da mettere in vendita.</figcaption>
       </figure>
     </div>
+  </section>
+
+  <section id="installa">
+    <h2>Come si installa</h2>
+    <p class="sub">L'app non è sul Play Store: si installa direttamente dall'APK. Ci vuole un minuto.</p>
+    <ol class="steps">
+      <li>
+        <h3>Scarica l'APK</h3>
+        <p>Apri questa pagina dal telefono Android e tocca "Scarica l'APK".</p>
+      </li>
+      <li>
+        <h3>Consenti l'installazione</h3>
+        <p>Apri il file scaricato. Android chiede di consentire le app da questa origine: attiva l'opzione per il browser che hai usato e torna indietro.</p>
+      </li>
+      <li>
+        <h3>Crea l'account</h3>
+        <p>Apri OmniTCG, tocca "Registrati", scegli i tuoi giochi e segui il tutorial.</p>
+      </li>
+    </ol>
+      <div class="cta">
+        <a class="btn apk-link" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
+          Scarica l'APK
+        </a>
+        <span class="meta">Solo Android</span>
+      </div>
+    <p class="note">Per ora c'è solo la versione Android. Prima di registrarti dai un'occhiata ai <a href="#limiti">limiti dell'account</a>.</p>
   </section>
 
   <section id="segnalazioni">
