@@ -164,7 +164,55 @@ h2 { font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -0.8px; line-height: 1
 .sub { color: var(--muted); margin: 0 0 32px; max-width: 40em; }
 
 /* Features: a 9-pocket binder page reduced to 3 × 2 */
-.pockets { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.pockets { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+
+/* Support mode: the stand drawn as in the app's tutorial. An oblique projection —
+   every receding edge goes up-right at 45° — built from skewed boxes:
+   .t a horizontal face (front edge x,y; width w; depth d), .s a right-hand face
+   (front edge x, from y down h; depth d), .f a plain front face. */
+.jig { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 48px; align-items: center; }
+.stand-wrap { width: 336px; height: 314px; max-width: 100%; }
+.stand { position: relative; width: 280px; height: 262px; transform: scale(1.2); transform-origin: top left; }
+.stand div { position: absolute; }
+.stand .t {
+  left: calc((var(--x) + var(--d) / 2) * 1px);
+  top: calc((var(--y) - var(--d)) * 1px);
+  width: calc(var(--w) * 1px);
+  height: calc(var(--d) * 1px);
+  transform: skewX(-45deg);
+}
+.stand .s {
+  left: calc(var(--x) * 1px);
+  top: calc((var(--y) - var(--d) / 2) * 1px);
+  width: calc(var(--d) * 1px);
+  height: calc(var(--h) * 1px);
+  transform: skewY(-45deg);
+  background: #C4C0B8;
+}
+.stand .f { left: calc(var(--x) * 1px); top: calc(var(--y) * 1px); width: calc(var(--w) * 1px); height: calc(var(--h) * 1px); background: #E2DFD8; }
+.stand .top { background: #F4F2EE; }
+.stand .well { background: #1b1d3a; overflow: hidden; }
+.stand .well::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 12px; background: #2a2d55; }
+.stand .fc { background: #F4F2EE; border-radius: 4px; }
+.stand .fc i { position: absolute; inset: 2px; border-radius: 3px; }
+.stand .fc i::before { content: ""; position: absolute; left: 5px; right: 5px; top: 3px; height: 12px; border-radius: 2px; background: rgba(255,255,255,0.35); }
+.stand .cone {
+  left: 113px; top: 80px; width: 12px; height: 0;
+  border-left: 30px solid transparent; border-right: 30px solid transparent;
+  border-bottom: 66px solid rgba(242,210,75,0.22);
+  animation: flash 3.2s ease-in-out infinite;
+}
+.stand .phone { background: #05060f; border-radius: 9px; }
+.stand .screen { inset: 3px; border-radius: 7px; background: #1c1f45; overflow: hidden; }
+.stand .island { left: 3px; top: 12px; width: 4px; height: 12px; border-radius: 2px; background: #000; }
+.stand .shot { left: 62px; top: 4px; width: 40px; height: 28px; border-radius: 3px; background: #E9B949; }
+.stand .shot::before { content: ""; position: absolute; left: 3px; right: 3px; top: 3px; height: 12px; border-radius: 2px; background: rgba(255,255,255,0.4); }
+.stand .ok { right: 8px; top: 11px; width: 14px; height: 14px; border-radius: 50%; background: var(--gold); }
+@keyframes flash { 0%, 60%, 100% { opacity: 0.45; } 70% { opacity: 1; } }
+.jig-points { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 14px; }
+.jig-points li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 14px; }
+.jig-points h3 { margin: 0 0 2px; font-size: 16px; }
+.jig-points p { margin: 0; color: var(--muted); font-size: 14.5px; }
 .pocket {
   background: var(--surface);
   border: 1px solid var(--line);
@@ -266,14 +314,14 @@ h2 { font-size: clamp(26px, 3.4vw, 34px); letter-spacing: -0.8px; line-height: 1
 .shop { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr); gap: 36px; align-items: start; }
 .shop-points { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
 .shop-points li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 14px; }
-.shop-points .dot {
+.shop-points .dot, .jig-points .dot {
   width: 34px; height: 34px;
   border-radius: 10px;
   display: grid; place-items: center;
   background: rgba(242,210,75,0.1);
   color: var(--gold);
 }
-.shop-points .dot svg { width: 18px; height: 18px; }
+.shop-points .dot svg, .jig-points .dot svg { width: 18px; height: 18px; }
 .shop-points h3 { margin: 0 0 2px; font-size: 16px; }
 .shop-points p { margin: 0; color: var(--muted); font-size: 14.5px; }
 .shop-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
@@ -423,6 +471,9 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
   .game { flex-basis: calc((100% - 2 * 12px) / 3); padding: 10px; }
   .limits { grid-template-columns: minmax(0, 1fr); }
   .shop { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .jig { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .stand-wrap { width: 308px; height: 288px; margin: 0 auto; }
+  .stand { transform: scale(1.1); }
   .limit { grid-template-columns: 72px minmax(0, 1fr); gap: 14px; padding: 16px; }
   .limit .num { font-size: 32px; }
 }
@@ -430,6 +481,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
   .pockets { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (prefers-reduced-motion: reduce) {
+  .stand .cone { animation: none; }
   .card, .btn { transition: none; }
 }
 </style>
@@ -462,6 +514,57 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
     </div>
   </div>
 
+  <section id="supporto">
+    <div class="jig">
+      <div class="stand-wrap" aria-hidden="true">
+        <div class="stand">
+          <div class="f" style="--x:222;--y:76;--w:18;--h:70"></div>
+          <div class="s" style="--x:240;--y:76;--h:70;--d:12"></div>
+          <div class="t top" style="--x:36;--y:186;--w:184;--d:52"></div>
+          <div class="t well" style="--x:48;--y:180;--w:160;--d:40"></div>
+          <div class="t fc" style="--x:100;--y:174;--w:64;--d:30"><i style="background:#5B8DEF"></i></div>
+          <div class="t fc" style="--x:100;--y:171;--w:64;--d:30"><i style="background:#6EE7A8"></i></div>
+          <div class="t fc" style="--x:100;--y:168;--w:64;--d:30"><i style="background:#EF7A6B"></i></div>
+          <div class="t fc" style="--x:100;--y:165;--w:64;--d:30"><i style="background:#E9B949"></i></div>
+          <div class="f" style="--x:36;--y:186;--w:184;--h:52"></div>
+          <div class="s" style="--x:220;--y:186;--h:52;--d:52"></div>
+          <div class="cone"></div>
+          <div class="t top" style="--x:70;--y:72;--w:170;--d:44"></div>
+          <div class="f" style="--x:70;--y:72;--w:170;--h:9"></div>
+          <div class="s" style="--x:240;--y:72;--h:9;--d:44"></div>
+          <div class="f" style="--x:58;--y:74;--w:166;--h:4;background:#3a3d5c;border-radius:2px"></div>
+          <div class="t phone" style="--x:58;--y:74;--w:166;--d:42">
+            <div class="screen"><div class="island"></div><div class="shot"></div><div class="ok"></div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2>Modalità supporto: scansioni a mani libere</h2>
+        <p class="sub" style="margin-bottom: 0">Per chi ha tante carte da registrare. Appoggi il telefono sul braccio del supporto, schermo in su, e lasci cadere le carte nella vaschetta sotto, una alla volta: ognuna viene scansionata da sola, senza toccare il telefono.</p>
+        <ul class="jig-points">
+          <li>
+            <span class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 17v4h10v-4"/></svg></span>
+            <div>
+              <h3>Hai una stampante 3D?</h3>
+              <p>Puoi stampare un qualunque supporto che abbia un braccio porta telefono e una vaschetta per le carte.</p>
+            </div>
+          </li>
+          <li>
+            <span class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></svg></span>
+            <div>
+              <h3>Non ce l'hai?</h3>
+              <p>Puoi richiedere il supporto direttamente a me.</p>
+            </div>
+          </li>
+        </ul>
+        <div class="shop-cta">
+          <a class="btn support-mail" href="#segnalazioni">Richiedi il supporto</a>
+        </div>
+        <p class="note">La modalità supporto si attiva sul tuo account su richiesta.</p>
+      </div>
+    </div>
+  </section>
+
   <section>
     <h2>Tutto quello che serve a un collezionista</h2>
     <p class="sub">Dalla carta appena uscita dalla bustina al valore dell'intera collezione.</p>
@@ -486,11 +589,6 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg></div>
         <h3>Mazzi</h3>
         <p>Crea i tuoi mazzi, riempili scansionando o dal catalogo e scopri quante carte ti mancano.</p>
-      </article>
-      <article class="pocket">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V8h14v13"/><path d="M5 8V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3"/><path d="M9 14h6"/></svg></div>
-        <h3>Modalità supporto</h3>
-        <p>Con il supporto stampato in 3D: telefono sul braccio, carte nella vaschetta una alla volta, e lo scatto parte da solo.</p>
       </article>
       <article class="pocket">
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="m8.5 14 -1.5 7 5-3 5 3-1.5-7"/></svg></div>
@@ -570,14 +668,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
           <p>I prezzi di CardTrader e Cardmarket delle tue carte sono inclusi per tutti, senza costi e senza limiti.</p>
         </div>
       </li>
-      <li class="limit off">
-        <div class="num">—<small>su richiesta</small></div>
-        <div>
-          <h3>Modalità supporto</h3>
-          <p>Spenta sugli account nuovi: si attiva su richiesta, se hai il supporto stampato.</p>
-        </div>
-      </li>
-      <li class="limit off">
+      <li class="limit off wide">
         <div class="num">—<small>su richiesta</small></div>
         <div>
           <h3>Riconoscimento veloce</h3>
@@ -619,8 +710,8 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
   </section>
 
   <section id="negozi">
-    <h2>Per i negozi: vendi su CardTrader</h2>
-    <p class="sub">Un account negozio collega il tuo account CardTrader e mette in vendita le carte del tuo inventario senza ricaricarle a mano una per una.</p>
+    <h2>Vendi su CardTrader</h2>
+    <p class="sub">Un account negozio collega il tuo account CardTrader e mette in vendita le carte del tuo inventario senza ricaricarle a mano una per una. Ti verrà fornita una web app dedicata.</p>
     <div class="shop">
       <div>
         <ul class="shop-points">
@@ -765,6 +856,10 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
     'https://github.com/TheJack95/TheJack95.github.io/issues/new?body=' + encodeURIComponent(ISSUE_BODY);
   document.getElementById('mail-addr').textContent = MAIL;
   document.getElementById('mail-link').href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('OmniTCG');
+  document.querySelectorAll('.support-mail').forEach((a) => {
+    a.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('OmniTCG: modalità supporto') +
+      '&body=' + encodeURIComponent("Email dell'account:\nModello del telefono:\nVorrei il supporto stampato / solo l'attivazione della modalità:\n");
+  });
   document.querySelectorAll('.limits-mail').forEach((a) => {
     a.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('OmniTCG: aumento dei limiti') +
       '&body=' + encodeURIComponent("Email dell'account:\nQuali limiti vorresti aumentare:\n");
