@@ -580,7 +580,7 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
     </ul>
     <p class="limits-more">
       <span>Tutti i limiti possono essere aumentati.</span>
-      <a class="pill-btn" href="#segnalazioni">Scrivimi per maggiori info</a>
+      <a class="pill-btn limits-mail" href="#segnalazioni">Scrivimi per maggiori info</a>
     </p>
   </section>
 
@@ -758,6 +758,10 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; color: var
     'https://github.com/TheJack95/TheJack95.github.io/issues/new?body=' + encodeURIComponent(ISSUE_BODY);
   document.getElementById('mail-addr').textContent = MAIL;
   document.getElementById('mail-link').href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('OmniTCG');
+  document.querySelectorAll('.limits-mail').forEach((a) => {
+    a.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('OmniTCG: aumento dei limiti') +
+      '&body=' + encodeURIComponent("Email dell'account:\nQuali limiti vorresti aumentare:\n");
+  });
   document.querySelectorAll('.shop-mail').forEach((a) => {
     a.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('OmniTCG: account negozio') +
       '&body=' + encodeURIComponent('Nome del negozio:\nGiochi che vendi:\nUsername CardTrader:\n');
